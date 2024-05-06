@@ -1,0 +1,9 @@
+{
+    "name": "product-chain-authenticity-backend",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "dependencies": {
+        "azle": "^0.19.0"
+    }
+}

@@ -1,0 +1,1 @@
+dfx deploy icrc1_index_canister --argument '(opt variant{Init = record {ledger_id = principal "mxzaz-hqaaa-aaaar-qaada-cai"}})'

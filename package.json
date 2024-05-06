@@ -17,6 +17,8 @@
     "src/product-chain-authenticity-frontend"
   ],
   "dependencies": {
-    "cargo": "^0.8.0"
+    "cargo": "^0.8.0",
+    "hashcode": "^1.0.3",
+    "uuid": "^9.0.1"
   }
 }

@@ -1,31 +1,24 @@
-import { useState } from 'react';
-import { product_chain_authenticity_backend } from 'declarations/product-chain-authenticity-backend';
+import React from 'react';
+import useAuth, { AuthProvider } from './services/auth-client.context';
+import MainApp from './route-app/main-app';
+import MainWeb from './route-app/main-web';
 
-function App() {
-  const [greeting, setGreeting] = useState('');
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    const name = event.target.elements.name.value;
-    product_chain_authenticity_backend.greet(name).then((greeting) => {
-      setGreeting(greeting);
-    });
-    return false;
-  }
-
+function CoreApp() {
+  const { isAuthenticated, identity } = useAuth();
   return (
-    <main>
-      <img src="/logo2.svg" alt="DFINITY logo" />
-      <br />
-      <br />
-      <form action="#" onSubmit={handleSubmit}>
-        <label htmlFor="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button type="submit">Click Me!</button>
-      </form>
-      <section id="greeting">{greeting}</section>
+    <main id="pageContent">
+      {isAuthenticated ? <MainApp /> : <MainWeb />}
     </main>
-  );
+  )
 }
 
-export default App;
+const App = () => {
+  return (
+    <AuthProvider>
+      <CoreApp />
+    </AuthProvider>
+  );
+};
+
+export default App

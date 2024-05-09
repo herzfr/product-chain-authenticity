@@ -17,8 +17,14 @@
     "src/product-chain-authenticity-frontend"
   ],
   "dependencies": {
+    "@dfinity/auth-client": "^1.0.1",
     "cargo": "^0.8.0",
     "hashcode": "^1.0.3",
+    "react-router-dom": "^6.22.3",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.25",
+    "uuidv4": "^6.2.13"
   }
 }

@@ -14,8 +14,7 @@ type Order = typeof Order.tsType;
 
 const manufacturerStorage = StableBTreeMap<Principal, Manufacturer>(0);
 const productStorage = StableBTreeMap<text, Product>(1);
-// const historyStorage = StableBTreeMap<text, ProductHistory>(2);
-const historyStorage = Vec(ProductHistory)
+const historyStorage = StableBTreeMap<text, ProductHistory>(2);
 const persistedOrders = StableBTreeMap<text, OrderList>(3);
 const pendingOrders = StableBTreeMap<nat64, Order>(4);
 
@@ -56,7 +55,7 @@ export default Canister({
         return orderList
     }),
     get_track_product_authenticity: query([text], Vec(ProductHistory), (product_code) => {
-        return historyStorage.tsType.filter(e => e.product_code === product_code)
+        return historyStorage.values().filter(e => e.product_code === product_code)
     }),
     // =====================================================================================================================
     //                                  CREATE / UPDATE / DELETE  || DATA
@@ -247,7 +246,7 @@ export default Canister({
                 timestamp: ic.time()
             }
 
-            historyStorage.tsType.push(newHistory)
+            historyStorage.insert(`${ic.time()}_${newHistory.product_code}`,newHistory)
             return Result.Ok({ Completed: 'Transfer is completed!' })
         } catch (error) {
             return Result.Err({ Failed: 'Failed to make transfer product' })
